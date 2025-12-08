@@ -1,115 +1,116 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { useEffect, useState } from "react"
+import { DashboardHeader } from "@/components/custom-ui/dashboard/dashboard-header"
+import { AppSidebar } from "@/components/ui/app-sidebar"
+import { TabsBar } from "@/components/custom-ui/dashboard/tabs-bar"
+import { Separator } from "@/components/ui/separator"
+import { TabContent } from "@/components/custom-ui/dashboard/TabContent"
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+interface Tab {
+  id: string
+  name: string
+}
 
 export default function Home() {
+  const [tabs, setTabs] = useState<Tab[]>([{ id: "dashboard", name: "Dashboard" }])
+  const [activeTabId, setActiveTabId] = useState("dashboard")
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
+  const [sidebarWidth, setSidebarWidth] = useState(240)
+  const [isDragging, setIsDragging] = useState(false)
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging) return
+      const newWidth = e.clientX
+      if (newWidth > 240 && newWidth < 500) {
+        setSidebarWidth(newWidth)
+      }
+    }
+
+    const handleMouseUp = () => {
+      setIsDragging(false)
+    }
+
+    if (isDragging) {
+      document.addEventListener("mousemove", handleMouseMove)
+      document.addEventListener("mouseup", handleMouseUp)
+    }
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove)
+      document.removeEventListener("mouseup", handleMouseUp)
+    }
+  }, [isDragging])
+
+  const handleTabChange = (id: string, name: string) => {
+    if (!tabs.find((tab) => tab.id === id)) {
+      setTabs((prev) => [...prev, { id, name }])
+    }
+    setActiveTabId(id)
+  }
+
+  const handleTabClose = (id: string) => {
+    if (id === "dashboard") return
+
+    const newTabs = tabs.filter((tab) => tab.id !== id)
+    setTabs(newTabs)
+
+    if (activeTabId === id) {
+      const newActive = newTabs[newTabs.length - 1]?.id || "dashboard"
+      setActiveTabId(newActive)
+    }
+  }
+
   return (
-    <div
-      className={`${geistSans.className} ${geistMono.className} font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20`}
-    >
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              pages/index.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <div className={isDragging ? "no-transition" : ""}>
+        <div className="min-h-screen bg-primary w-full">
+          {/* Fixed Header */}
+          <DashboardHeader />
+
+          {/* Sidebar */}
+          <AppSidebar
+              activeTabId={activeTabId}
+              onTabChange={handleTabChange}
+              collapsed={sidebarCollapsed}
+              onCollapseChange={setSidebarCollapsed}
+              sidebarWidth={sidebarWidth}
+              isDragging={isDragging}
+              setIsDragging={setIsDragging}
+          />
+
+          <main
+              className={`pt-10 transition-all duration-300  ${
+                  sidebarCollapsed ? "pt-10 ml-4" : "pt-10 ml-[250px]"
+              }`}
+              style={{
+                marginLeft: sidebarCollapsed ? 4 : sidebarWidth,
+              }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className={`${sidebarCollapsed ? "pl-[8px] pr-3" : "pl-[23px] pr-3"}`}>
+              <div className="flex-1 h-[calc(99vh-78px)] mt-7 flex flex-col border border-border rounded-lg shadow-sm bg-card overflow-hidden">
+
+                {/* Tabs Bar */}
+                <TabsBar
+                    tabs={tabs}
+                    activeTabId={activeTabId}
+                    onTabSelect={setActiveTabId}
+                    onTabClose={handleTabClose}
+                />
+
+                <Separator />
+
+                {/* Tab Content */}
+                <div className="flex-1 pt-20 overflow-auto p-6">
+                  <TabContent activeTabId={activeTabId} />
+                </div>
+              </div>
+            </div>
+            <div className="text-[10px] pt-[2px] text-white text-center">
+              Version : 1.0.0 | Released date: 2025-01-15 | @Copyright 2025 by ACLEDA Bank Plc. All Rights Reserved.
+            </div>
+          </main>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </div>
+  )
 }
