@@ -39,10 +39,6 @@ export default function ReportCCDProjectComponent() {
 
     return (
         <div className="space-y-4 -mt-14">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Report CCD Project</h1>
-                <p className="text-muted-foreground">Reports from Credit Control Division</p>
-            </div>
 
             {!loading && !error && CCDComponent && (
                 <div className="animate-in fade-in duration-300">

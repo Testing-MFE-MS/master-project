@@ -18,14 +18,33 @@ const nextConfig = {
                         react: {
                             singleton: true,
                             requiredVersion: false,
+                            eager: false,
                         },
                         'react-dom': {
+                            singleton: true,
+                            requiredVersion: false,
+                            eager: false,
+                        },
+                        '@radix-ui/react-slot': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        'class-variance-authority': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        'clsx': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        'tailwind-merge': {
                             singleton: true,
                             requiredVersion: false,
                         },
                     },
                     extraOptions: {
                         automaticAsyncBoundary: true,
+                        exposePages: false,
                     },
                 })
             );
