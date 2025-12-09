@@ -103,7 +103,7 @@ export function AppSidebar({
         )}
       >
         {/* Search */}
-        <div className="flex-shrink-0 ml-1 pl-4 py-4 border-b border-primary-foreground/10">
+        <div className="flex-shrink-0 mt-1 ml-1 pl-4 py-2 border-b border-primary-foreground/10">
           {!collapsed ? (
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-primary-foreground/60" />
@@ -125,7 +125,7 @@ export function AppSidebar({
         {/* Navigation */}
         <nav className="flex-1  overflow-y-auto overscroll-contain no-scrollbar">
           {/* Dashboard */}
-          <div className=" ml-1 pl-4 py-4 space-y-2">
+          <div className=" ml-1 pl-4 py-2 space-y-2">
             <Button
               variant={activeTabId === "dashboard" ? "secondary" : "ghost"}
               className={cn(
@@ -141,8 +141,8 @@ export function AppSidebar({
           </div>
 
           {/* Credit Control */}
-          <div className="ml-1 pl-4 py-4 space-y-2">
-            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3 py-2">Credit Control Division</p>}
+          <div className="ml-1 pl-4 py-2 space-y-2">
+            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3">Credit Control Division</p>}
             <div className="space-y-2">
               {creditControlItems.map((item) => (
                 <Button
@@ -163,8 +163,8 @@ export function AppSidebar({
           </div>
 
           {/* MIS */}
-          <div className="ml-1 pl-4 py-4 space-y-2">
-            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3 py-2">MIS</p>}
+          <div className="ml-1 pl-4 py-2 space-y-2">
+            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3">MIS</p>}
             <div className="space-y-2">
               {misItems.map((item) => (
                 <Button
@@ -185,8 +185,8 @@ export function AppSidebar({
           </div>
 
           {/* Portal */}
-          <div className="ml-1 pl-4 py-4 space-y-2">
-            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3 py-2">PORTAL</p>}
+          <div className="ml-1 pl-4 py-2 space-y-2">
+            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3">PORTAL</p>}
             <div className="space-y-2">
               {portalItems.map((item) => (
                 <Button
@@ -207,8 +207,8 @@ export function AppSidebar({
           </div>
 
           {/* Applications */}
-          <div className="ml-1 pl-4 py-4 space-y-2">
-            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3 py-2">Applications</p>}
+          <div className="ml-1 pl-4 py-2 space-y-2">
+            {!collapsed && <p className="text-sm text-primary-foreground/60 font-medium px-3">Applications</p>}
             {searchResults.length > 0 ? (
               <div className="space-y-2">
                 {searchResults.map((item) => (
@@ -228,13 +228,13 @@ export function AppSidebar({
                 ))}
               </div>
             ) : (
-              searchQuery && !collapsed && <p className="text-xs text-primary-foreground/50 px-3 py-2">No results found</p>
+              searchQuery && !collapsed && <p className="text-xs text-primary-foreground/50 px-3">No results found</p>
             )}
           </div>
         </nav>
 
         {/* Footer */}
-        <div className="shrink-0 ml-1 pl-4 py-4 border-t border-primary-foreground/20">
+        <div className="shrink-0 ml-1 pl-4 py-2 border-t border-primary-foreground/20">
           {!collapsed && (
             <div className="flex justify-center items-center gap-2 px-3 py-2 bg-primary-foreground/10 rounded-md">
               <MapPinned className="h-4 w-4 shrink-0" />
@@ -302,7 +302,7 @@ export function AppSidebar({
           bg-transparent hover:bg-primary/30
         "
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-4 w-4 text-secondary" />
       </Button>
     </div>
   </div>

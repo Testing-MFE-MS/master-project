@@ -101,12 +101,12 @@ export default function Home() {
                 <Separator />
 
                 {/* Tab Content */}
-                <div className="flex-1 pt-20 overflow-auto p-6">
+                <div className="flex-1 pt-20 overflow-auto p-6 border-t-1 border-secondary">
                   <TabContent activeTabId={activeTabId} />
                 </div>
               </div>
             </div>
-            <div className="text-[10px] pt-[2px] text-white text-center">
+            <div className="text-[10px] pt-[2px] text-white text-center tracking-[0.5px]">
               Version : 1.0.0 | Released date: 2025-01-15 | @Copyright 2025 by ACLEDA Bank Plc. All Rights Reserved.
             </div>
           </main>
