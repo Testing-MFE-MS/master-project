@@ -26,6 +26,7 @@ const nextConfig = {
                     },
                     extraOptions: {
                         automaticAsyncBoundary: true,
+                        loadRemoteStyles: true, // IMPORTANT
                     },
                 })
             );
