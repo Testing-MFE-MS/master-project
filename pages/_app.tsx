@@ -1,7 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Geist, Geist_Mono } from "next/font/google";
-// import { SidebarProvider } from "@/components/ui/app-sidebar";
+import {SidebarProvider} from "@/components/ui/sidebar";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-            {/*<SidebarProvider>*/}
+            <SidebarProvider>
                 <Component {...pageProps} />
-            {/*</SidebarProvider>*/}
+            </SidebarProvider>
         </div>
     );
 }

@@ -1,12 +1,14 @@
-const { NextFederationPlugin } = require('@module-federation/nextjs-mf');
+import type { NextConfig } from 'next';
+import type { Configuration } from 'webpack';
+import NextFederationPlugin from '@module-federation/nextjs-mf';
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
     reactStrictMode: true,
-    webpack(config, options) {
+    webpack(config: Configuration, options: { isServer: boolean }) {
         const { isServer } = options;
 
         if (!isServer) {
+            config.plugins = config.plugins || [];
             config.plugins.push(
                 new NextFederationPlugin({
                     name: 'masterPage',
@@ -25,7 +27,40 @@ const nextConfig = {
                             requiredVersion: false,
                             eager: false,
                         },
+                        // Add utility libraries
                         '@radix-ui/react-slot': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-label': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-select': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-checkbox': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-dialog': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-tabs': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-accordion': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-popover': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        '@radix-ui/react-radio-group': {
                             singleton: true,
                             requiredVersion: false,
                         },
@@ -41,9 +76,16 @@ const nextConfig = {
                             singleton: true,
                             requiredVersion: false,
                         },
+                        'lucide-react': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
+                        'date-fns': {
+                            singleton: true,
+                            requiredVersion: false,
+                        },
                     },
                     extraOptions: {
-                        automaticAsyncBoundary: true,
                         exposePages: false,
                     },
                 })
@@ -52,6 +94,6 @@ const nextConfig = {
 
         return config;
     },
-}
+};
 
-module.exports = nextConfig;
+export default nextConfig;

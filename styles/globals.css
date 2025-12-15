@@ -1,4 +1,3 @@
-/*style/global.css*/
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -52,10 +51,10 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.3484 0.0885 255.99); /* #173a67 */
-  --primary-foreground: oklch(1 0 0); /* #ffffff */
-  --secondary: oklch(0.7398 0.1225 88.35); /* #CBAC51 */
-  --secondary-foreground: oklch(0.205 0 0); /* #1f2937 */
+  --primary: oklch(0.3484 0.0885 255.99);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.7398 0.1225 88.35);
+  --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --accent: oklch(0.97 0 0);
@@ -123,10 +122,9 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-  /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
   .no-transition * {
     transition: none !important;

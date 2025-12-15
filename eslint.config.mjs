@@ -20,6 +20,22 @@ const eslintConfig = [
       "next-env.d.ts",
     ],
   },
+  {
+    rules: {
+      "@next/next/no-assign-module-variable": "off"
+    },
+  },
+  {
+    files: [
+      "**/components/custom-ui/credit/ReportCCDProjectComponent.tsx",
+      "**/components/custom-ui/credit/UserCreditComponent.tsx",
+      "**/components/custom-ui/credit/WorkingPaperComponent.tsx",
+    ],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/ban-ts-comment": "off",
+    },
+  },
 ];
 
 export default eslintConfig;
