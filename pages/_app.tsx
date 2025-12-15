@@ -1,21 +1,17 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import {SidebarProvider} from "@/components/ui/sidebar";
 
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
+const geistMono = localFont({
+    src: '../fonts/Geist_Mono/GeistMono-VariableFont_wght.ttf',
     variable: "--font-geist-mono",
-    subsets: ["latin"],
+    weight: '100 900',
 });
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
-        <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div className={`${geistMono.variable} antialiased`}>
             <SidebarProvider>
                 <Component {...pageProps} />
             </SidebarProvider>

@@ -1,11 +1,20 @@
 "use client"
 
+import localFont from "next/font/local";
 import { useEffect, useState } from "react"
 import { DashboardHeader } from "@/components/custom-ui/dashboard/dashboard-header"
 import { AppSidebar } from "@/components/ui/app-sidebar"
 import { TabsBar } from "@/components/custom-ui/dashboard/tabs-bar"
 import { Separator } from "@/components/ui/separator"
 import { TabContent } from "@/components/custom-ui/dashboard/TabContent"
+
+
+const geistMono = localFont({
+  src: '../fonts/Geist_Mono/GeistMono-VariableFont_wght.ttf',
+  variable: "--font-geist-mono",
+  weight: '100 900',
+});
+
 
 interface Tab {
   id: string
