@@ -55,7 +55,7 @@ export function DashboardContent() {
   return (
     <div className="space-y-6 text-foreground -mt-14 mx-auto max-w-screen-3xl">
       {/* Header */}
-      <div>
+      <div> 
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
         <p className="text-muted-foreground">Welcome back! Here&#39;s what&#39;s happening today.</p>
       </div>
